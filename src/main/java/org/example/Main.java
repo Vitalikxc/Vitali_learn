@@ -4,6 +4,7 @@ import org.example.homework_1.Homework1;
 import org.example.homework_2.Homework2;
 import org.example.homework_2.Practice;
 import org.example.homework_4.Homework4;
+import org.example.homework_5.Homework5;
 
 public class Main {
 
@@ -11,13 +12,14 @@ public class Main {
     private static final Homework2 homework2 = new Homework2();
     private static final Practice practice = new Practice();
     private static final Homework4 homework4 = new Homework4();
-
+    private static final Homework5 homework5 = new Homework5();
 
     public static void main(String[] args) {
         runHomework1();
         runHomework2();
         runPractice();
         runHomework4();
+        runHomework5();
     }
 
     private static void runHomework1() {
@@ -61,5 +63,11 @@ public class Main {
         homework4.task5();
         homework4.task6();
         homework4.task7();
+    }
+
+    private static void runHomework5(){
+        homework5.task1();
+        homework5.task2();
+        homework5.task3();
     }
 }
