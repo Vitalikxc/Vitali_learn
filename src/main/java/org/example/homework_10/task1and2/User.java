@@ -2,53 +2,42 @@ package org.example.homework_10.task1and2;
 
 import java.util.Objects;
 
-import static org.example.homework_10.task1and2.TypeClone.DEEP;
-import static org.example.homework_10.task1and2.TypeClone.SHALLOW;
-
-public class User {
+public class User implements Cloneable {
     private String name;
     private int age;
     private int id;
+    private Address address;
 
-    public String getName() {
-        return name;
+    public User(String name, int age, int id, Address address) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+        this.address = address;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public User() {
-    }
-
-    public User(String name, int age, int id) {
-        this.name = name;
-        this.age = age;
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return "UserSystem{" +
+        return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", id=" + id +
+                " " + address +
                 '}';
     }
 
@@ -65,14 +54,13 @@ public class User {
         return Objects.hash(name, age, id);
     }
 
-    public User myClone(TypeClone typeClone, User user) {
-        User userClone = new User();
-        if (typeClone == DEEP) {
-            userClone.name = user.name;
-            userClone.age = user.age;
-            userClone.id = user.id;
-        } else if (typeClone == SHALLOW) {
-            userClone = user;
+    public Object clone(TypeClone typeClone) throws CloneNotSupportedException {
+        User userClone = (User) super.clone();
+        if (typeClone == TypeClone.DEEP) {
+            System.out.println("Глубокое клонирование");
+            if (this.address != null) {
+                userClone.address = this.address.clone();
+            }
         }
         return userClone;
     }

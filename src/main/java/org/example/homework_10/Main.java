@@ -1,26 +1,27 @@
 package org.example.homework_10;
 
+import org.example.homework_10.task1and2.Address;
 import org.example.homework_10.task1and2.TypeClone;
 import org.example.homework_10.task1and2.User;
 
 public class Main {
-    public static void main(String[] args) {
-        User userOne = new User("Tom",15,1);
-        User userTwo = new User("Tom",15,1);
-        User userThree = new User("Tom",12,1);
-        System.out.println(userTwo.equals(userOne));
-        System.out.println(userOne.equals(userThree));
+    public static void main(String[] args) throws CloneNotSupportedException {
+        User user = new User("Tom", 12,1, new Address("Moscow"));
+        User shallowClone = (User) user.clone(TypeClone.SHALLOW);
+        User deepClone = (User) user.clone(TypeClone.DEEP);
 
-        User user = new User("Bob", 11, 1);
-        User userShallow = user.myClone(TypeClone.SHALLOW, user);
-        User userDeep = user.myClone(TypeClone.DEEP, user);
+        shallowClone.setName("Andrey");
+        shallowClone.setAge(15);
+        shallowClone.setId(2);
+        shallowClone.getAddress().setCity("Minsk");
+        deepClone.setName("Alex");
+        deepClone.setAge(20);
+        deepClone.setId(3);
+        deepClone.getAddress().setCity("Mogilev");
+
         System.out.println(user);
-        System.out.println(userShallow);
-        System.out.println(userDeep);
-        userDeep.setId(3);
-        userShallow.setId(6);
-        System.out.println(user);
-        System.out.println(userShallow);
-        System.out.println(userDeep);
+        System.out.println(shallowClone);
+        System.out.println(deepClone);
+
     }
 }
